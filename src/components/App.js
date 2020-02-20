@@ -16,10 +16,11 @@ class App extends React.Component {
       currUserMovie: null,
       userText: '',
 
-      currentLivaMode: true,
+      movieDisplayMode: "library",
+      movieDisplayArr: [],
     };
 
-    this.changeCurrMovie = this.changeCurrMovie.bind(this);
+    // this.changeCurrMovie = this.changeCurrMovie.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
@@ -27,9 +28,46 @@ class App extends React.Component {
 
   }
 
-  changeCurrMovie(movieIndex) {
-    this.setState({ currMovie: moviesArr[movieIndex] })
-  }
+  // changeCurrMovie(movieIndex) {
+  //   this.setState({ currMovie: moviesArr[movieIndex] })
+  // }
+// 
+
+  // var VideoList = ({ videos, changeMainVideo }) => (
+  //   <div className="video-list">
+  //     {videos.map((video, idx) => (
+  //       <VideoListEntry
+  //         video={video}
+  //         changeMainVideo={changeMainVideo}
+  //         idx={idx}
+  //       />
+  //     ))}
+  //   </div>
+  // );
+  
+  // var moviesDisplayList = ({ movies, displayMode }) => (
+  //   <div className="movies-display-list">
+  //     {movies.map((movie, movieIndex) => (
+  //       <MovieListEntry
+  //         movie={movie}
+  //         index={index}
+  //         source={source}
+  //       />
+  //     ))}
+  //   </div>
+  // );
+
+  var VideoListEntry = ({ video, idx, changeMainVideo }) => (
+    <div className="video-list-entry media">
+      <div className="media-left media-middle">
+        <img className="media-object" src={video.snippet.thumbnails.default.url} alt="" />
+      </div>
+      <div className="media-body">
+        <div onClick={() => changeMainVideo(idx)} className="video-list-entry-title">{video.snippet.title}</div>
+        <div className="video-list-entry-detail">{video.snippet.description}</div>
+      </div>
+    </div>
+  );
 
   handleChange(event) {
     this.setState({ text: event.target.value });
@@ -189,6 +227,21 @@ class App extends React.Component {
           <div>
             .
           </div>
+
+          {this.state.movies.map((movie, index, source) => {
+          if (movie.source === source) {
+            return (
+              <MovieEntry
+                title={movie.title}
+              />
+            )
+          }
+          return null;
+        })}
+
+
+
+
         </div> 
 
         </tbody>
@@ -227,11 +280,11 @@ var Search = ({ handleChange, handleClick }) => (
 );
 
 var moviesArr = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'The Sunshine'},
-  {title: 'Ex Machina'},
+  {title: 'Mean Girls', library: true},
+  {title: 'Hackers', library: true},
+  {title: 'The Grey', library: true},
+  {title: 'The Sunshine', library: true},
+  {title: 'Ex Machina', library: true},
 ];
 
 export default App;
