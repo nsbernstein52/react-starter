@@ -10,10 +10,13 @@ class App extends React.Component {
       moviesListStr: '',
       currMovie: null,
       text: '',
+
       userMoviesArr: [],
       userMoviesListStr: '',
       currUserMovie: null,
       userText: '',
+
+      currentLivaMode: true,
     };
 
     this.changeCurrMovie = this.changeCurrMovie.bind(this);
@@ -102,6 +105,10 @@ class App extends React.Component {
     let moviesListStrTemp = userMoviesTempArr.join(", ")
     console.log(moviesListStrTemp)
     this.setState({ userMoviesListStr: moviesListStrTemp});
+    this.setState({ currentLivaMode: false});
+    if (!this.state.currentLivaMode) {
+
+    }
   }
 
   render() {
@@ -112,48 +119,28 @@ class App extends React.Component {
           Movie List
           </h3>
         </div>
-        <div className="tbd">
-        </div>
 
-        <div className=".search-bar">
-          Search
-            <Search
-              handleChange={this.handleChange}
-              handleClick={this.handleClick}
-            />
-        </div>
-        <div className=".search-results">
-          Search results: 
-        {/* console.log({this.state.text}) */}
-        </div>
-        <div>
-          {this.state.moviesListStr}
-        </div>
+        <div className="library-based-movies">
 
-        <div>
-          .
-        </div>
-
-        {/* user added */}
-        <div className=".search-bar">
-          Add your favorite movies (comma separated)
-            <AddMovie
-              handleUserChange={this.handleUserChange}
-              handleUserClick={this.handleUserClick}
-            />
-        </div>
-        <div className=".search-results">
-        My added movies results: 
-        {/* console.log({this.state.text}) */}
-        </div>
-        <div>
-          {this.state.userMoviesListStr}
+          <div className=".search-bar">
+            Search
+              <Search
+                handleChange={this.handleChange}
+                handleClick={this.handleClick}
+              />
+          </div>
+          <div className=".search-results">
+            Search results: 
+          {/* console.log({this.state.text}) */}
+          </div>
+          <div>
+            {this.state.moviesListStr}
+          </div>
         </div>
 
         <div>
           .
         </div>
-          
       
         <div className=".movie-list">
         <tbody>
@@ -173,6 +160,37 @@ class App extends React.Component {
           <tr key="4" className="singleMovieEntry">
             {moviesArr[4].title}
           </tr>
+
+        <div>
+          .
+        </div>
+        <div>
+          .
+        </div>
+
+        <div className="user-added-movies">
+
+          {/* user added */}
+          <div className=".search-bar">
+            Add your favorite movies (comma separated)
+              <AddMovie
+                handleUserChange={this.handleUserChange}
+                handleUserClick={this.handleUserClick}
+              />
+          </div>
+          <div className=".search-results">
+          My added movies results: 
+          {/* console.log({this.state.text}) */}
+          </div>
+          <div>
+            {this.state.userMoviesListStr}
+          </div>
+
+          <div>
+            .
+          </div>
+        </div> 
+
         </tbody>
         </div>
       </div>
