@@ -6,6 +6,8 @@ class App extends React.Component {
     
     this.state = {
       moviesArr: [],
+      movieList: [],
+      moviesListStr: '',
       currMovie: null,
       text: ''
     };
@@ -30,9 +32,33 @@ class App extends React.Component {
     // fetch(`${this.state.text}`)
     //   .then(res => res.json())
     //   .then(moviesArr => this.setState({ moviesArr: currMovie, currMovie: currMovie.title[0] }))
-    console.log(document.body.getElementsByClassName("form-control")[0].value);
-    console.log(this.state.text);
-  }
+    // console.log(document.body.getElementsByClassName("form-control")[0].value);
+    let currText = this.state.text;
+    // console.log(currText);
+    // console.log(this.state.text);
+    let matchStrsArr = [];
+    // let noMatch = true;
+    for (let i = 0; i < moviesArr.length; i++) {
+      let currTitle = moviesArr[i].title;
+      // console.log(currTitle);
+      if (currTitle.indexOf(currText) !== -1) {
+        // matchStrsArr.push(moviesArr[i].title);
+        matchStrsArr.push(currTitle);
+        // {this.state.movieList}.push(moviesArr[i].title);
+      }
+    }
+    if (matchStrsArr.length === 0) {
+      matchStrsArr.push("None");
+    }
+    console.log(matchStrsArr);
+    // {this.state.movieList}.push = matchStrArr.slice();
+    this.setState({ movieList: matchStrsArr});
+    // return matchStrsArr;
+    let moviesListStrTemp = matchStrsArr.join(", ")
+    console.log(moviesListStrTemp)
+    this.setState({ moviesListStr: moviesListStrTemp});
+
+}
   
   render() {
     return(
@@ -50,7 +76,17 @@ class App extends React.Component {
               handleChange={this.handleChange}
               handleClick={this.handleClick}
             />
-          </div>
+        </div>
+        <div className=".search-results">
+        Search results: 
+        {/* console.log({this.state.text}) */}
+        </div>
+        <div>
+          {this.state.moviesListStr}
+        </div>
+        <div>
+          .
+        </div>
           
       
         <div className=".movie-list">
@@ -95,7 +131,7 @@ var moviesArr = [
   {title: 'Mean Girls'},
   {title: 'Hackers'},
   {title: 'The Grey'},
-  {title: 'Sunshine'},
+  {title: 'The Sunshine'},
   {title: 'Ex Machina'},
 ];
 
